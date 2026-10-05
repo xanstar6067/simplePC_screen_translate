@@ -66,12 +66,30 @@ public sealed record HotkeySettings
     public uint Modifiers => (Alt ? 1u : 0) | (Control ? 2u : 0) | (Shift ? 4u : 0) | (Windows ? 8u : 0);
     [JsonIgnore]
     public bool IsValid => Key is >= Keys.A and <= Keys.Z or >= Keys.D0 and <= Keys.D9 or
-        >= Keys.F1 and <= Keys.F24 or Keys.Space or Keys.Oemtilde or Keys.OemMinus or Keys.Oemplus;
+        >= Keys.F1 and <= Keys.F24 or >= Keys.NumPad0 and <= Keys.NumPad9 or
+        Keys.Space or Keys.Tab or Keys.Enter or Keys.Back or Keys.Delete or Keys.Insert or
+        Keys.Home or Keys.End or Keys.PageUp or Keys.PageDown or Keys.Left or Keys.Right or Keys.Up or Keys.Down or
+        Keys.PrintScreen or Keys.Multiply or Keys.Add or Keys.Subtract or Keys.Decimal or Keys.Divide or
+        Keys.Oemtilde or Keys.OemMinus or Keys.Oemplus or Keys.Oemcomma or Keys.OemPeriod or
+        Keys.Oem1 or Keys.Oem2 or Keys.Oem4 or Keys.Oem5 or Keys.Oem6 or Keys.Oem7 or Keys.Oem102;
     public override string ToString() => string.Join(" + ", new[]
     {
         Control ? "Ctrl" : null, Alt ? "Alt" : null, Shift ? "Shift" : null, Windows ? "Win" : null,
-        Key is >= Keys.D0 and <= Keys.D9 ? ((int)Key - (int)Keys.D0).ToString() : Key.ToString()
+        DisplayKey(Key)
     }.Where(x => x is not null));
+
+    private static string DisplayKey(Keys key) => key switch
+    {
+        >= Keys.D0 and <= Keys.D9 => ((int)key - (int)Keys.D0).ToString(),
+        >= Keys.NumPad0 and <= Keys.NumPad9 => "Num " + ((int)key - (int)Keys.NumPad0),
+        Keys.Space => "Пробел", Keys.Back => "Backspace", Keys.PrintScreen => "Print Screen",
+        Keys.Left => "←", Keys.Right => "→", Keys.Up => "↑", Keys.Down => "↓",
+        Keys.Oemtilde => "~", Keys.OemMinus or Keys.Subtract => "−", Keys.Oemplus or Keys.Add => "+",
+        Keys.Oemcomma => ",", Keys.OemPeriod or Keys.Decimal => ".", Keys.Oem1 => ";",
+        Keys.Oem2 or Keys.Divide => "/", Keys.Oem4 => "[", Keys.Oem5 or Keys.Oem102 => "\\",
+        Keys.Oem6 => "]", Keys.Oem7 => "'", Keys.Multiply => "*",
+        _ => key.ToString()
+    };
 }
 
 public sealed record LanguageOption(string Code, string Name)

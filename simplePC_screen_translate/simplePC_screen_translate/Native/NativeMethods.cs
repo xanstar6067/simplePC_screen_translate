@@ -7,6 +7,8 @@ internal static class NativeMethods
     internal const int WmHotkey = 0x0312;
     internal const int WmNcHitTest = 0x0084;
     internal const int WmMouseActivate = 0x0021;
+    [DllImport("user32.dll")]
+    internal static extern short GetAsyncKeyState(int virtualKey);
     [DllImport("user32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static extern bool RegisterHotKey(nint hWnd, int id, uint modifiers, uint key);

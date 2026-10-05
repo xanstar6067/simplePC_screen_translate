@@ -33,6 +33,8 @@ internal static class Program
             ParagraphGeometry();
             OverlayAlpha();
             HotkeyConflict();
+            HotkeyRecording();
+            DesignerInitialization();
             Task.Run(CoreAsync).GetAwaiter().GetResult();
             SettingsLayout();
             if (args.Contains("--live")) Task.Run(LiveAsync).GetAwaiter().GetResult();
@@ -116,7 +118,64 @@ internal static class Program
         catch (InvalidOperationException) { }
         first.Register(key with { Key = Keys.F20 });
         second.Register(key);
+        first.Suspend();
+        second.Register(key with { Key = Keys.F20 });
+        try { first.Resume(); throw new Exception("A hotkey stolen during recording was silently accepted"); }
+        catch (InvalidOperationException) { }
+        second.Register(key);
+        first.Resume();
         Pass("global hotkey conflict detection and replacement");
+    }
+    private static void HotkeyRecording()
+    {
+        using var editor = new TestHotkeyTextBox();
+        var before = editor.Value;
+        var entered = 0;
+        var left = 0;
+        editor.CaptureStarted += (_, _) => entered++;
+        editor.CaptureFinished += (_, _) => left++;
+        editor.BeginCapture();
+        editor.Press(Keys.ControlKey | Keys.Control);
+        Assert(editor.Value == before, "A modifier alone changed the saved hotkey");
+        editor.Press(Keys.F8 | Keys.Control | Keys.Shift);
+        Assert(editor.Value is { Key: Keys.F8, Control: true, Shift: true, Alt: false, Windows: false }, "A recorded combination is incorrect");
+        Assert(editor.Text == "Ctrl + Shift + F8", "Recorded hotkey is not readable");
+        editor.Command(Keys.Control | Keys.Tab);
+        Assert(editor.Value is { Key: Keys.Tab, Control: true }, "Navigation keys were not recorded");
+        editor.Press(Keys.LWin);
+        editor.Press(Keys.F9);
+        Assert(editor.Value is { Key: Keys.F9, Windows: true }, "Windows modifier was lost");
+        editor.Release(Keys.LWin);
+        editor.Press(Keys.F10);
+        Assert(editor.Value is { Key: Keys.F10, Windows: false, Alt: false, Control: false }, "A single key inherited modifiers");
+        editor.Press(Keys.Escape);
+        Assert(editor.Value == before, "Escape did not restore the previous hotkey");
+        editor.EndCapture();
+        editor.BeginCapture();
+        editor.Press(Keys.F12);
+        editor.EndCapture();
+        Assert(editor.Value.Key == Keys.F12 && editor.Text == "F12" && entered == 2 && left == 2, "Recorded key was lost on leaving the field");
+        var path = Path.Combine(_output, "recorded-hotkey.json");
+        var store = new SettingsStore(path);
+        store.Save(new AppSettings { Hotkey = editor.Value });
+        Assert(store.Load(out _).Hotkey == editor.Value, "Recorded key was lost after restarting");
+        Pass("hotkey recording: combinations, navigation, Win, Escape and persistence");
+    }
+    private static void DesignerInitialization()
+    {
+        var previous = System.ComponentModel.LicenseManager.CurrentContext;
+        try
+        {
+            System.ComponentModel.LicenseManager.CurrentContext = new TestDesignContext();
+            using var form = (Form1)Activator.CreateInstance(typeof(Form1))!;
+            var tabs = Descendants(form).OfType<TabControl>().Single();
+            Assert(tabs.TabPages.Count == 3 && Descendants(form).OfType<HotkeyTextBox>().Count() == 1, "Designer has no settings controls");
+            foreach (var name in new[] { "_client", "_hotkeys", "_tray" })
+                Assert(typeof(Form1).GetField(name, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.GetValue(form) is null,
+                    "Designer started runtime service " + name);
+        }
+        finally { System.ComponentModel.LicenseManager.CurrentContext = previous; }
+        Pass("parameterless designer initialization without HTTP, tray or global hotkeys");
     }
     private static async Task CoreAsync()
     {
@@ -191,6 +250,8 @@ internal static class Program
         Console.WriteLine($"Windows UI font: {systemFont.Name}, {systemFont.SizeInPoints} pt. Form font: {form.Font.Name}");
         Assert(form.Font.Name == systemFont.Name, "Settings do not use the Windows UI font");
         Assert(Descendants(form).OfType<Button>().Any(x => x.Text == "Весь экран"), "Direct full screen translation is missing");
+        Assert(Descendants(form).OfType<HotkeyTextBox>().Single().Value == new HotkeySettings(), "Default hotkey recording field is missing");
+        Assert(!Descendants(form).OfType<CheckBox>().Any(x => x.Text is "Ctrl" or "Alt" or "Shift" or "Win"), "Old modifier checkboxes remain");
         form.ShowInTaskbar = false;
         form.StartPosition = FormStartPosition.Manual;
         form.Location = new(-10000, -10000);
@@ -290,5 +351,22 @@ internal static class Program
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
             { Content = new StringContent(Translations == 1 ? "{\"code\":403}" : "{\"code\":200,\"text\":[\"你好\"]}") });
         }
+    }
+    private sealed class TestHotkeyTextBox : HotkeyTextBox
+    {
+        public void BeginCapture() => OnEnter(EventArgs.Empty);
+        public void EndCapture() => OnLeave(EventArgs.Empty);
+        public void Press(Keys key) => OnKeyDown(new KeyEventArgs(key));
+        public void Release(Keys key) => OnKeyUp(new KeyEventArgs(key));
+        public void Command(Keys key)
+        {
+            var message = Message.Create(0, 0x100, (nint)(key & Keys.KeyCode), 0);
+            ProcessCmdKey(ref message, key);
+        }
+        protected override bool IsWindowsKeyDown() => false;
+    }
+    private sealed class TestDesignContext : System.ComponentModel.LicenseContext
+    {
+        public override System.ComponentModel.LicenseUsageMode UsageMode => System.ComponentModel.LicenseUsageMode.Designtime;
     }
 }

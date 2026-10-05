@@ -8,11 +8,11 @@ namespace simplePC_screen_translate;
 public partial class Form1 : Form
 {
     private readonly SettingsStore _store;
-    private readonly WebTranslationClient _client = new();
-    private readonly TranslationService _translator;
+    private readonly WebTranslationClient _client = null!;
+    private readonly TranslationService _translator = null!;
     private readonly LocalOcrService _ocr = new();
-    private readonly HotkeyManager _hotkeys = new();
-    private readonly NotifyIcon _tray;
+    private readonly HotkeyManager _hotkeys = null!;
+    private readonly NotifyIcon _tray = null!;
     private readonly System.Windows.Forms.Timer _overlayTimer = new();
     private AppSettings _settings;
     private CancellationTokenSource? _operation;
@@ -23,14 +23,21 @@ public partial class Form1 : Form
     private bool _loading = true;
     private bool _resourcesDisposed;
 
-    public Form1(SettingsStore? store = null)
+    public Form1() : this(null) { }
+
+    public Form1(SettingsStore? store)
     {
         InitializeComponent();
+        Font = SystemFonts.MessageBoxFont ?? SystemFonts.DefaultFont;
         Icon = SystemIcons.Application;
         _store = store ?? new SettingsStore();
+        _settings = new();
+        if (DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            return;
         _settings = _store.Load(out var warning);
+        _client = new WebTranslationClient();
+        _hotkeys = new HotkeyManager();
         _translator = new(_client);
-        BuildInterface();
         PopulateControls();
         LoadSettings(_settings);
         TrackChanges(this);
@@ -49,6 +56,21 @@ public partial class Form1 : Form
         _font.Click += (_, _) => ChooseFont();
         _textColor.Click += (_, _) => ChooseColor(true);
         _backgroundColor.Click += (_, _) => ChooseColor(false);
+        _windowsLanguages.Click += (_, _) => OpenWindowsLanguages();
+        _hotkey.ValueChanged += (_, _) => MarkChanged();
+        _hotkey.CaptureStarted += (_, _) =>
+        {
+            if (_exiting) return;
+            _hotkeys.Suspend();
+            _hotkeys.DisableEscape();
+        };
+        _hotkey.CaptureFinished += (_, _) =>
+        {
+            if (_exiting) return;
+            try { _hotkeys.Resume(); _hotkeyAvailable = true; }
+            catch (InvalidOperationException ex) { _hotkeyAvailable = false; SetStatus(ex.Message); }
+            if (_operation is not null || _overlay is not null) _hotkeys.EnableEscape();
+        };
         _hotkeys.TranslatePressed += async (_, _) =>
         {
             if (_restoring || _exiting) return;
@@ -217,7 +239,7 @@ public partial class Form1 : Form
         var hadOverlay = _overlay is not null;
         _overlay?.Close(); _overlay?.Dispose(); _overlay = null;
         _hideButton.Enabled = false;
-        _hotkeys.DisableEscape();
+        _hotkeys?.DisableEscape();
         if (hadOverlay && updateStatus) SetStatus("Перевод убран. Горячая клавиша — новый перевод.");
     }
     private void ShowSettings()
@@ -240,6 +262,7 @@ public partial class Form1 : Form
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
+        if (_tray is null) { base.OnFormClosing(e); return; }
         if (!_exiting && e.CloseReason == CloseReason.UserClosing && _settings.CloseToTray)
         {
             e.Cancel = true; Hide();
@@ -261,6 +284,6 @@ public partial class Form1 : Form
         _resourcesDisposed = true;
         _exiting = true;
         CancelOperation(); HideOverlay(false);
-        _tray?.Dispose(); _overlayTimer.Dispose(); _hotkeys.Dispose(); _client.Dispose();
+        _tray?.Dispose(); _overlayTimer.Dispose(); _hotkeys?.Dispose(); _client?.Dispose();
     }
 }
