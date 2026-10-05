@@ -375,7 +375,7 @@ namespace simplePC_screen_translate
             _overlayPage.Location = new Point(4, 24);
             _overlayPage.Name = "_overlayPage";
             _overlayPage.Padding = new Padding(15);
-            _overlayPage.Size = new Size(150, 0);
+            _overlayPage.Size = new Size(670, 529);
             _overlayPage.TabIndex = 1;
             _overlayPage.Text = "Оверлей";
             _overlayPage.UseVisualStyleBackColor = true;
@@ -420,7 +420,7 @@ namespace simplePC_screen_translate
             _overlayTable.RowStyles.Add(new RowStyle());
             _overlayTable.RowStyles.Add(new RowStyle());
             _overlayTable.RowStyles.Add(new RowStyle());
-            _overlayTable.Size = new Size(120, 932);
+            _overlayTable.Size = new Size(640, 491);
             _overlayTable.TabIndex = 0;
             // 
             // _fontRowLabel
@@ -430,7 +430,7 @@ namespace simplePC_screen_translate
             _fontRowLabel.Location = new Point(0, 6);
             _fontRowLabel.Margin = new Padding(0, 6, 12, 8);
             _fontRowLabel.Name = "_fontRowLabel";
-            _fontRowLabel.Size = new Size(39, 61);
+            _fontRowLabel.Size = new Size(263, 36);
             _fontRowLabel.TabIndex = 0;
             _fontRowLabel.Text = "Шрифт";
             _fontRowLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -442,10 +442,10 @@ namespace simplePC_screen_translate
             _fontRow.Controls.Add(_font);
             _fontRow.Controls.Add(_bold);
             _fontRow.Dock = DockStyle.Fill;
-            _fontRow.Location = new Point(51, 4);
+            _fontRow.Location = new Point(275, 4);
             _fontRow.Margin = new Padding(0, 4, 0, 8);
             _fontRow.Name = "_fontRow";
-            _fontRow.Size = new Size(69, 63);
+            _fontRow.Size = new Size(365, 38);
             _fontRow.TabIndex = 1;
             // 
             // _font
@@ -461,7 +461,7 @@ namespace simplePC_screen_translate
             // _bold
             // 
             _bold.AutoSize = true;
-            _bold.Location = new Point(3, 41);
+            _bold.Location = new Point(104, 3);
             _bold.Name = "_bold";
             _bold.Size = new Size(101, 19);
             _bold.TabIndex = 1;
@@ -471,9 +471,9 @@ namespace simplePC_screen_translate
             // 
             _autoSize.AutoSize = true;
             _overlayTable.SetColumnSpan(_autoSize, 2);
-            _autoSize.Location = new Point(3, 78);
+            _autoSize.Location = new Point(3, 53);
             _autoSize.Name = "_autoSize";
-            _autoSize.Size = new Size(114, 19);
+            _autoSize.Size = new Size(231, 19);
             _autoSize.TabIndex = 2;
             _autoSize.Text = "Подбирать размер по области текста";
             // 
@@ -481,10 +481,10 @@ namespace simplePC_screen_translate
             // 
             _fontSizeLabel.AutoSize = true;
             _fontSizeLabel.Dock = DockStyle.Fill;
-            _fontSizeLabel.Location = new Point(0, 106);
+            _fontSizeLabel.Location = new Point(0, 81);
             _fontSizeLabel.Margin = new Padding(0, 6, 12, 8);
             _fontSizeLabel.Name = "_fontSizeLabel";
-            _fontSizeLabel.Size = new Size(39, 90);
+            _fontSizeLabel.Size = new Size(263, 21);
             _fontSizeLabel.TabIndex = 3;
             _fontSizeLabel.Text = "Размер вручную, пиксели";
             _fontSizeLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -492,7 +492,7 @@ namespace simplePC_screen_translate
             // _fontSize
             // 
             _fontSize.AccessibleName = "Размер вручную, пиксели";
-            _fontSize.Location = new Point(51, 104);
+            _fontSize.Location = new Point(275, 79);
             _fontSize.Margin = new Padding(0, 4, 0, 8);
             _fontSize.Maximum = new decimal(new int[] { 64, 0, 0, 0 });
             _fontSize.Minimum = new decimal(new int[] { 8, 0, 0, 0 });
@@ -505,10 +505,10 @@ namespace simplePC_screen_translate
             // 
             _rangeRowLabel.AutoSize = true;
             _rangeRowLabel.Dock = DockStyle.Fill;
-            _rangeRowLabel.Location = new Point(0, 210);
+            _rangeRowLabel.Location = new Point(0, 116);
             _rangeRowLabel.Margin = new Padding(0, 6, 12, 8);
             _rangeRowLabel.Name = "_rangeRowLabel";
-            _rangeRowLabel.Size = new Size(39, 90);
+            _rangeRowLabel.Size = new Size(263, 27);
             _rangeRowLabel.TabIndex = 5;
             _rangeRowLabel.Text = "Диапазон размера, пиксели";
             _rangeRowLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -521,10 +521,10 @@ namespace simplePC_screen_translate
             _rangeRow.Controls.Add(_rangeDash);
             _rangeRow.Controls.Add(_maxFont);
             _rangeRow.Dock = DockStyle.Fill;
-            _rangeRow.Location = new Point(51, 208);
+            _rangeRow.Location = new Point(275, 114);
             _rangeRow.Margin = new Padding(0, 4, 0, 8);
             _rangeRow.Name = "_rangeRow";
-            _rangeRow.Size = new Size(69, 92);
+            _rangeRow.Size = new Size(365, 29);
             _rangeRow.TabIndex = 6;
             // 
             // _minFont
@@ -540,7 +540,7 @@ namespace simplePC_screen_translate
             // _rangeDash
             // 
             _rangeDash.AutoSize = true;
-            _rangeDash.Location = new Point(6, 35);
+            _rangeDash.Location = new Point(97, 6);
             _rangeDash.Margin = new Padding(6);
             _rangeDash.Name = "_rangeDash";
             _rangeDash.Size = new Size(19, 15);
@@ -549,7 +549,7 @@ namespace simplePC_screen_translate
             // 
             // _maxFont
             // 
-            _maxFont.Location = new Point(3, 59);
+            _maxFont.Location = new Point(125, 3);
             _maxFont.Maximum = new decimal(new int[] { 64, 0, 0, 0 });
             _maxFont.Minimum = new decimal(new int[] { 8, 0, 0, 0 });
             _maxFont.Name = "_maxFont";
@@ -561,10 +561,10 @@ namespace simplePC_screen_translate
             // 
             _colorsRowLabel.AutoSize = true;
             _colorsRowLabel.Dock = DockStyle.Fill;
-            _colorsRowLabel.Location = new Point(0, 314);
+            _colorsRowLabel.Location = new Point(0, 157);
             _colorsRowLabel.Margin = new Padding(0, 6, 12, 8);
             _colorsRowLabel.Name = "_colorsRowLabel";
-            _colorsRowLabel.Size = new Size(39, 74);
+            _colorsRowLabel.Size = new Size(263, 36);
             _colorsRowLabel.TabIndex = 7;
             _colorsRowLabel.Text = "Цвета";
             _colorsRowLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -576,10 +576,10 @@ namespace simplePC_screen_translate
             _colorsRow.Controls.Add(_textColor);
             _colorsRow.Controls.Add(_backgroundColor);
             _colorsRow.Dock = DockStyle.Fill;
-            _colorsRow.Location = new Point(51, 312);
+            _colorsRow.Location = new Point(275, 155);
             _colorsRow.Margin = new Padding(0, 4, 0, 8);
             _colorsRow.Name = "_colorsRow";
-            _colorsRow.Size = new Size(69, 76);
+            _colorsRow.Size = new Size(365, 38);
             _colorsRow.TabIndex = 8;
             // 
             // _textColor
@@ -595,7 +595,7 @@ namespace simplePC_screen_translate
             // _backgroundColor
             // 
             _backgroundColor.AutoSize = true;
-            _backgroundColor.Location = new Point(3, 41);
+            _backgroundColor.Location = new Point(104, 3);
             _backgroundColor.Name = "_backgroundColor";
             _backgroundColor.Size = new Size(95, 32);
             _backgroundColor.TabIndex = 1;
@@ -606,10 +606,10 @@ namespace simplePC_screen_translate
             // 
             _opacityLabel.AutoSize = true;
             _opacityLabel.Dock = DockStyle.Fill;
-            _opacityLabel.Location = new Point(0, 402);
+            _opacityLabel.Location = new Point(0, 207);
             _opacityLabel.Margin = new Padding(0, 6, 12, 8);
             _opacityLabel.Name = "_opacityLabel";
-            _opacityLabel.Size = new Size(39, 75);
+            _opacityLabel.Size = new Size(263, 21);
             _opacityLabel.TabIndex = 9;
             _opacityLabel.Text = "Непрозрачность фона, %";
             _opacityLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -617,7 +617,7 @@ namespace simplePC_screen_translate
             // _opacity
             // 
             _opacity.AccessibleName = "Непрозрачность фона, %";
-            _opacity.Location = new Point(51, 400);
+            _opacity.Location = new Point(275, 205);
             _opacity.Margin = new Padding(0, 4, 0, 8);
             _opacity.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
             _opacity.Name = "_opacity";
@@ -629,10 +629,10 @@ namespace simplePC_screen_translate
             // 
             _paddingLabel.AutoSize = true;
             _paddingLabel.Dock = DockStyle.Fill;
-            _paddingLabel.Location = new Point(0, 491);
+            _paddingLabel.Location = new Point(0, 242);
             _paddingLabel.Margin = new Padding(0, 6, 12, 8);
             _paddingLabel.Name = "_paddingLabel";
-            _paddingLabel.Size = new Size(39, 60);
+            _paddingLabel.Size = new Size(263, 21);
             _paddingLabel.TabIndex = 11;
             _paddingLabel.Text = "Отступы, пиксели";
             _paddingLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -640,7 +640,7 @@ namespace simplePC_screen_translate
             // _padding
             // 
             _padding.AccessibleName = "Отступы, пиксели";
-            _padding.Location = new Point(51, 489);
+            _padding.Location = new Point(275, 240);
             _padding.Margin = new Padding(0, 4, 0, 8);
             _padding.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             _padding.Name = "_padding";
@@ -652,10 +652,10 @@ namespace simplePC_screen_translate
             // 
             _alignmentLabel.AutoSize = true;
             _alignmentLabel.Dock = DockStyle.Fill;
-            _alignmentLabel.Location = new Point(0, 565);
+            _alignmentLabel.Location = new Point(0, 277);
             _alignmentLabel.Margin = new Padding(0, 6, 12, 8);
             _alignmentLabel.Name = "_alignmentLabel";
-            _alignmentLabel.Size = new Size(39, 45);
+            _alignmentLabel.Size = new Size(263, 21);
             _alignmentLabel.TabIndex = 13;
             _alignmentLabel.Text = "Выравнивание";
             _alignmentLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -666,20 +666,20 @@ namespace simplePC_screen_translate
             _alignment.Dock = DockStyle.Fill;
             _alignment.DropDownStyle = ComboBoxStyle.DropDownList;
             _alignment.Items.AddRange(new object[] { "По левому краю", "По центру" });
-            _alignment.Location = new Point(51, 563);
+            _alignment.Location = new Point(275, 275);
             _alignment.Margin = new Padding(0, 4, 0, 8);
             _alignment.Name = "_alignment";
-            _alignment.Size = new Size(69, 23);
+            _alignment.Size = new Size(365, 23);
             _alignment.TabIndex = 14;
             // 
             // _secondsLabel
             // 
             _secondsLabel.AutoSize = true;
             _secondsLabel.Dock = DockStyle.Fill;
-            _secondsLabel.Location = new Point(0, 624);
+            _secondsLabel.Location = new Point(0, 312);
             _secondsLabel.Margin = new Padding(0, 6, 12, 8);
             _secondsLabel.Name = "_secondsLabel";
-            _secondsLabel.Size = new Size(39, 90);
+            _secondsLabel.Size = new Size(263, 21);
             _secondsLabel.TabIndex = 15;
             _secondsLabel.Text = "Скрывать через, секунды";
             _secondsLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -687,7 +687,7 @@ namespace simplePC_screen_translate
             // _seconds
             // 
             _seconds.AccessibleName = "Скрывать через, секунды";
-            _seconds.Location = new Point(51, 622);
+            _seconds.Location = new Point(275, 310);
             _seconds.Margin = new Padding(0, 4, 0, 8);
             _seconds.Maximum = new decimal(new int[] { 300, 0, 0, 0 });
             _seconds.Name = "_seconds";
@@ -699,11 +699,11 @@ namespace simplePC_screen_translate
             _overlayHint.AutoSize = true;
             _overlayTable.SetColumnSpan(_overlayHint, 2);
             _overlayHint.Dock = DockStyle.Fill;
-            _overlayHint.Location = new Point(0, 729);
+            _overlayHint.Location = new Point(0, 348);
             _overlayHint.Margin = new Padding(0, 7, 0, 12);
             _overlayHint.MaximumSize = new Size(620, 0);
             _overlayHint.Name = "_overlayHint";
-            _overlayHint.Size = new Size(120, 75);
+            _overlayHint.Size = new Size(620, 15);
             _overlayHint.TabIndex = 17;
             _overlayHint.Text = "0 — показывать до горячей клавиши или Esc. Прозрачность меняет только фон.";
             // 
@@ -712,9 +712,9 @@ namespace simplePC_screen_translate
             _preview.BorderStyle = BorderStyle.FixedSingle;
             _overlayTable.SetColumnSpan(_preview, 2);
             _preview.Dock = DockStyle.Top;
-            _preview.Location = new Point(3, 819);
+            _preview.Location = new Point(3, 378);
             _preview.Name = "_preview";
-            _preview.Size = new Size(114, 110);
+            _preview.Size = new Size(634, 110);
             _preview.TabIndex = 18;
             // 
             // _recognitionPage
@@ -724,7 +724,7 @@ namespace simplePC_screen_translate
             _recognitionPage.Location = new Point(4, 24);
             _recognitionPage.Name = "_recognitionPage";
             _recognitionPage.Padding = new Padding(15);
-            _recognitionPage.Size = new Size(150, 0);
+            _recognitionPage.Size = new Size(670, 529);
             _recognitionPage.TabIndex = 2;
             _recognitionPage.Text = "Распознавание";
             _recognitionPage.UseVisualStyleBackColor = true;
@@ -755,7 +755,7 @@ namespace simplePC_screen_translate
             _recognitionTable.RowStyles.Add(new RowStyle());
             _recognitionTable.RowStyles.Add(new RowStyle());
             _recognitionTable.RowStyles.Add(new RowStyle());
-            _recognitionTable.Size = new Size(120, 673);
+            _recognitionTable.Size = new Size(640, 265);
             _recognitionTable.TabIndex = 0;
             // 
             // _ocrLanguageLabel
@@ -765,7 +765,7 @@ namespace simplePC_screen_translate
             _ocrLanguageLabel.Location = new Point(0, 6);
             _ocrLanguageLabel.Margin = new Padding(0, 6, 12, 8);
             _ocrLanguageLabel.Name = "_ocrLanguageLabel";
-            _ocrLanguageLabel.Size = new Size(39, 60);
+            _ocrLanguageLabel.Size = new Size(263, 21);
             _ocrLanguageLabel.TabIndex = 0;
             _ocrLanguageLabel.Text = "Язык распознавания";
             _ocrLanguageLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -776,20 +776,20 @@ namespace simplePC_screen_translate
             _ocrLanguage.Dock = DockStyle.Fill;
             _ocrLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
             _ocrLanguage.Items.AddRange(new object[] { "Автоматически" });
-            _ocrLanguage.Location = new Point(51, 4);
+            _ocrLanguage.Location = new Point(275, 4);
             _ocrLanguage.Margin = new Padding(0, 4, 0, 8);
             _ocrLanguage.Name = "_ocrLanguage";
-            _ocrLanguage.Size = new Size(69, 23);
+            _ocrLanguage.Size = new Size(365, 23);
             _ocrLanguage.TabIndex = 1;
             // 
             // _scaleLabel
             // 
             _scaleLabel.AutoSize = true;
             _scaleLabel.Dock = DockStyle.Fill;
-            _scaleLabel.Location = new Point(0, 80);
+            _scaleLabel.Location = new Point(0, 41);
             _scaleLabel.Margin = new Padding(0, 6, 12, 8);
             _scaleLabel.Name = "_scaleLabel";
-            _scaleLabel.Size = new Size(39, 105);
+            _scaleLabel.Size = new Size(263, 21);
             _scaleLabel.TabIndex = 2;
             _scaleLabel.Text = "Увеличение мелкого текста, ×";
             _scaleLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -797,7 +797,7 @@ namespace simplePC_screen_translate
             // _scale
             // 
             _scale.AccessibleName = "Увеличение мелкого текста, ×";
-            _scale.Location = new Point(51, 78);
+            _scale.Location = new Point(275, 39);
             _scale.Margin = new Padding(0, 4, 0, 8);
             _scale.Maximum = new decimal(new int[] { 3, 0, 0, 0 });
             _scale.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -810,9 +810,9 @@ namespace simplePC_screen_translate
             // 
             _merge.AutoSize = true;
             _recognitionTable.SetColumnSpan(_merge, 2);
-            _merge.Location = new Point(3, 196);
+            _merge.Location = new Point(3, 73);
             _merge.Name = "_merge";
-            _merge.Size = new Size(114, 19);
+            _merge.Size = new Size(215, 19);
             _merge.TabIndex = 4;
             _merge.Text = "Объединять строки одного абзаца";
             // 
@@ -821,11 +821,11 @@ namespace simplePC_screen_translate
             _ocrHint.AutoSize = true;
             _recognitionTable.SetColumnSpan(_ocrHint, 2);
             _ocrHint.Dock = DockStyle.Fill;
-            _ocrHint.Location = new Point(0, 225);
+            _ocrHint.Location = new Point(0, 102);
             _ocrHint.Margin = new Padding(0, 7, 0, 12);
             _ocrHint.MaximumSize = new Size(620, 0);
             _ocrHint.Name = "_ocrHint";
-            _ocrHint.Size = new Size(120, 135);
+            _ocrHint.Size = new Size(620, 30);
             _ocrHint.TabIndex = 5;
             _ocrHint.Text = "Распознавание работает на компьютере. Если текст читается неверно, выберите его язык вручную. Увеличение ×2 помогает с мелким текстом.";
             // 
@@ -833,9 +833,9 @@ namespace simplePC_screen_translate
             // 
             _windowsLanguages.AutoSize = true;
             _recognitionTable.SetColumnSpan(_windowsLanguages, 2);
-            _windowsLanguages.Location = new Point(3, 375);
+            _windowsLanguages.Location = new Point(3, 147);
             _windowsLanguages.Name = "_windowsLanguages";
-            _windowsLanguages.Size = new Size(114, 32);
+            _windowsLanguages.Size = new Size(152, 32);
             _windowsLanguages.TabIndex = 6;
             _windowsLanguages.Text = "Открыть языки Windows";
             _windowsLanguages.UseVisualStyleBackColor = true;
@@ -845,11 +845,11 @@ namespace simplePC_screen_translate
             _ocrInstallHint.AutoSize = true;
             _recognitionTable.SetColumnSpan(_ocrInstallHint, 2);
             _ocrInstallHint.Dock = DockStyle.Fill;
-            _ocrInstallHint.Location = new Point(0, 417);
+            _ocrInstallHint.Location = new Point(0, 189);
             _ocrInstallHint.Margin = new Padding(0, 7, 0, 12);
             _ocrInstallHint.MaximumSize = new Size(620, 0);
             _ocrInstallHint.Name = "_ocrInstallHint";
-            _ocrInstallHint.Size = new Size(120, 90);
+            _ocrInstallHint.Size = new Size(620, 15);
             _ocrInstallHint.TabIndex = 7;
             _ocrInstallHint.Text = "Для нового языка установите распознавание текста в языковых параметрах Windows.";
             // 
@@ -858,11 +858,11 @@ namespace simplePC_screen_translate
             _privacyHint.AutoSize = true;
             _recognitionTable.SetColumnSpan(_privacyHint, 2);
             _privacyHint.Dock = DockStyle.Fill;
-            _privacyHint.Location = new Point(0, 526);
+            _privacyHint.Location = new Point(0, 223);
             _privacyHint.Margin = new Padding(0, 7, 0, 12);
             _privacyHint.MaximumSize = new Size(620, 0);
             _privacyHint.Name = "_privacyHint";
-            _privacyHint.Size = new Size(120, 135);
+            _privacyHint.Size = new Size(620, 30);
             _privacyHint.TabIndex = 8;
             _privacyHint.Text = "Снимок экрана остаётся на компьютере. Переводчику отправляется только распознанный текст. Для перевода нужен интернет.";
             // 

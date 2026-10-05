@@ -11,6 +11,11 @@
     <ApplicationDefaultFont>Segoe UI, 9pt</ApplicationDefaultFont>
     <AssemblyName>ScreenTranslator</AssemblyName>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\AppIcon.ico" LogicalName="ScreenTranslator.AppIcon.ico" />
+  </ItemGroup>
 
 </Project>

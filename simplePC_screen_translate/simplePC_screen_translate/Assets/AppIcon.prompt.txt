@@ -1,0 +1,6 @@
+Generated with the built-in image_gen tool. Transparent background enabled.
+
+Use case: logo-brand. Asset type: final Windows desktop application icon for ScreenTranslator, a screen overlay text translator. Create ONE polished square icon on a genuinely transparent background, not an icon presentation sheet. A simple front-facing rounded dark blue computer monitor silhouette with a short stand. Within the screen two large overlapping translation tiles: one cobalt blue with a crisp white capital A, one lighter cyan with a crisp white Cyrillic Я. A small simple white arrow between tiles suggests translation overlay. Strong recognizable silhouette, bold simple shapes, restrained modern Windows app icon finish, very subtle depth only. Composition centered, fills 88% of the square with modest transparent margin, designed to remain legible at 16, 24, 32 and 48 pixels. No tiny text, no other letters, no title, no watermark, no surrounding scene, no shadow outside the icon, no decorative details. High quality clean edges and alpha transparency.
+
+AppIcon.png preserves the generated image and alpha channel.
+AppIcon.ico contains PNG frames at 16, 20, 24, 32, 40, 48, 64, 128, and 256 pixels.

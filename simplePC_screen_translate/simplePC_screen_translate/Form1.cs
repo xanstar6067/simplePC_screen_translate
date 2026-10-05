@@ -22,6 +22,8 @@ public partial class Form1 : Form
     private bool _exiting, _hotkeyAvailable, _restoring, _dirty;
     private bool _loading = true;
     private bool _resourcesDisposed;
+    private readonly Icon _applicationIcon;
+    private Icon? _trayIcon;
 
     public Form1() : this(null) { }
 
@@ -29,11 +31,16 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         Font = SystemFonts.MessageBoxFont ?? SystemFonts.DefaultFont;
-        Icon = SystemIcons.Application;
+        using var iconStream = typeof(Form1).Assembly.GetManifestResourceStream("ScreenTranslator.AppIcon.ico")
+            ?? throw new InvalidOperationException("Не найден значок приложения.");
+        _applicationIcon = new Icon(iconStream);
+        Icon = _applicationIcon;
         _store = store ?? new SettingsStore();
         _settings = new();
         if (DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
             return;
+        // The designer omits an empty container; the tray is added only at runtime.
+        components ??= new System.ComponentModel.Container();
         _settings = _store.Load(out var warning);
         _client = new WebTranslationClient();
         _hotkeys = new HotkeyManager();
@@ -89,7 +96,8 @@ public partial class Form1 : Form
         menu.Items.Add("Убрать перевод", null, (_, _) => HideOverlay());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("Выход", null, (_, _) => { _exiting = true; Close(); });
-        _tray = new NotifyIcon(components!) { Icon = Icon, Text = "Экранный переводчик", Visible = true, ContextMenuStrip = menu };
+        _trayIcon = new Icon(_applicationIcon, SystemInformation.SmallIconSize);
+        _tray = new NotifyIcon(components!) { Icon = _trayIcon, Text = "Экранный переводчик", Visible = true, ContextMenuStrip = menu };
         _tray.DoubleClick += (_, _) => ShowSettings();
         _tray.BalloonTipClicked += (_, _) => ShowSettings();
         TryRegisterHotkey();
@@ -285,5 +293,6 @@ public partial class Form1 : Form
         _exiting = true;
         CancelOperation(); HideOverlay(false);
         _tray?.Dispose(); _overlayTimer.Dispose(); _hotkeys?.Dispose(); _client?.Dispose();
+        _trayIcon?.Dispose(); _applicationIcon.Dispose();
     }
 }
