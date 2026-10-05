@@ -139,3 +139,6 @@ _NCrunch*
 # Secret files
 [Jj]sonSecret/
 [Rr]ef kt/
+
+# Local release bundles and visual verification artifacts
+artifacts/

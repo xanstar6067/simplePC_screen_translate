@@ -13,6 +13,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing) DisposeResources();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -30,8 +31,11 @@
         {
             components = new System.ComponentModel.Container();
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Form1";
+            Font = SystemFonts.MessageBoxFont ?? SystemFonts.DefaultFont;
+            ClientSize = new Size(720, 710);
+            MinimumSize = new Size(660, 600);
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Экранный переводчик";
         }
 
         #endregion
